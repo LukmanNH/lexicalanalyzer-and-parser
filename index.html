@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+    <script src="https://kit.fontawesome.com/d37d69da17.js" crossorigin="anonymous"></script>
+    <title>TUBES TBA MAZEH</title>
+    <py-env>
+        - paths:
+            - /lexical_analizer.py
+            - /parser.py
+    </py-env>
+</head>
+
+<body>
+
+    <py-script>
+        from lexical_analizer import *
+        from parser import *
+    </py-script>
+    <div class="context text-center">
+        <div class="card mx-4 mx-md-5 shadow-5-strong" style="
+        background: hsla(0, 0%, 100%, 0.8);
+        backdrop-filter: blur(30px);
+        ">
+    <div class="card-body py-5 px-md-5">
+      <div class="row d-flex justify-content-center">
+        <div class="col-lg-4">
+          <h2 class="fw-bold mb-5">Lexical Analyzer and Parser Checker</h2>
+            <div class="form-outline mb-4">
+              <input id="parsing" type="text" class="form-control" />
+              <label class="form-label">Masukkan kalimat yang ingin di check</label>
+            </div>
+            <div class="container py-5">
+                <div id="output"></div>
+                <div id="output2"></div>
+            </div>
+            <button pys-onClick="sub" onclick="myFunction()" id="submit-button" type="submit" class="btn btn-primary btn-block mb-4">
+              Check here!
+            </button>
+            <br />
+            <a id="input-another" onClick="history.go(0);" class="d-none btn btn-info">Input Another</a>
+        </div>
+      </div>
+    </div>
+  </div>
+        <py-script>
+            Z = ["they", "he", "she"]
+            H = ["is", "are"]
+            V = ["eating", "playing", "buying", "hunting", "learning"]
+            O = ["grapes", "games", "seeds", "lunch", "science"]
+            S = [Z,H,V,O]
+        </py-script>
+        <py-script>
+            def sub(*args, **kwargs):
+                <!-- text = Element('parsing').element.value -->
+                sentence = Element('parsing').element.value
+                nodeList = createNodeList()
+                nodeList = setRelations(nodeList)
+        
+                if analizeLexicon(sentence, nodeList) == True:
+                    <!-- arrayifiedWord = arrayify(sentence) -->
+                    arrayifiedWord = arrayify(sentence)
+                    Element('output').element.innerText = "Lexicon OK"
+                    result = parse(arrayifiedWord, S)
+
+                    if result == True:
+                        Element('output2').element.innerText = "parser OK"
+                    else:
+                        Element('output2').element.innerText = "parser Error"
+                else:
+                    Element('output').element.innerText = "Lexicon Error"
+
+                    
+                    <!-- parse(arrayifiedWord, S) -->
+            
+        </py-script>
+        
+    </div>
+    <div class="floating-container">
+        <button class="floating-button" data-bs-toggle="modal" data-bs-target="#exampleModal">!</button>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Grammar: </h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Z = ["they", "he", "she"]</p>
+                <p>H = ["is", "are"]</p>
+                <p>V = ["eating", "playing", "buying", "hunting", "learning"]</p>
+                <p>O = ["grapes", "games", "seeds", "lunch", "science"]</p>
+                <p>S = [Z,H,V,O]</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    <div class="area" >
+        <ul class="circles">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+        </ul>
+</div >
+    <script>
+        function myFunction() {
+            var inputAnother = document.getElementById("input-another");
+            inputAnother.classList.remove("d-none");
+
+            var getButton = document.getElementById('submit-button');
+            getButton.classList.add('disabled')
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+</body>
+
+</html>
