@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="styles.css">
     <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
     <script src="https://kit.fontawesome.com/d37d69da17.js" crossorigin="anonymous"></script>
-    <title>TUBES TBA MAZEH</title>
+    <title>Lexical Analyzer and Parser</title>
     <py-env>
         - paths:
             - /lexical_analizer.py
@@ -41,7 +41,7 @@
                 <div id="output"></div>
                 <div id="output2"></div>
             </div>
-            <button pys-onClick="sub" onclick="myFunction()" id="submit-button" type="submit" class="btn btn-primary btn-block mb-4">
+            <button pys-onClick="sub" onclick="showInputAnother()" id="submit-button" type="submit" class="btn btn-primary btn-block mb-4">
               Check here!
             </button>
             <br />
@@ -122,7 +122,7 @@
         </ul>
 </div >
     <script>
-        function myFunction() {
+        function showInputAnother() {
             var inputAnother = document.getElementById("input-another");
             inputAnother.classList.remove("d-none");
 
